@@ -1,0 +1,209 @@
+# This Python 3 environment comes with many helpful analytics libraries installed
+# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
+# For example, here's several helpful packages to load
+
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+/kaggle/input/worldwide-cancer-data/Global cancer incidence both sexes.csv
+/kaggle/input/worldwide-cancer-data/Global cancer incidence in women.csv
+/kaggle/input/worldwide-cancer-data/Global cancer incidence in men.csv
+import matplotlib.pyplot as plt 
+import seaborn as sn
+import pandas as pd
+import numpy as np 
+import os
+
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+/kaggle/input/worldwide-cancer-data/Global cancer incidence both sexes.csv
+/kaggle/input/worldwide-cancer-data/Global cancer incidence in women.csv
+/kaggle/input/worldwide-cancer-data/Global cancer incidence in men.csv
+all_cancer = pd.read_csv("/kaggle/input/worldwide-cancer-data/Global cancer incidence both sexes.csv")
+all_cancer.head()
+Unnamed: 0	Rank	Cancer	New cases in 2020	% of all cancers
+0	0	NaN	All cancers*	18094716	NaN
+1	1	1.0	Breast	2261419	12.5
+2	2	2.0	Lung	2206771	12.2
+3	3	3.0	Colorectal**	1931590	10.7
+4	4	4.0	Prostate	1414259	7.8
+female = pd.read_csv("/kaggle/input/worldwide-cancer-data/Global cancer incidence in women.csv")
+female.head()
+Unnamed: 0	Rank	Cancer	New cases in 2020	% of all cancers
+0	0	NaN	All cancers*	8751759	NaN
+1	1	1.0	Breast	2261419	25.8
+2	2	2.0	Colorectal **	865630	9.9
+3	3	3.0	Lung	770828	8.8
+4	4	4.0	Cervix uteri	604127	6.9
+male = pd.read_csv('/kaggle/input/worldwide-cancer-data/Global cancer incidence in men.csv')
+male.head()
+Unnamed: 0	Rank	Cancer	New cases in 2020	% of all cancers
+0	0	NaN	All cancers*	9342957	NaN
+1	1	1.0	Lung	1435943	15.4
+2	2	2.0	Prostate	1414259	15.1
+3	3	3.0	Colorectal**	1065960	11.4
+4	4	4.0	Stomach	719523	7.7
+def shape (dataframe):
+    print("=" *20 , 'dataframe shape', "=" * 20)
+    print(dataframe.shape)
+    print('\n')
+    
+def describe (dataframe): 
+    print("=" *20 , 'dataframe describe', "=" * 20)
+    print(dataframe.describe())
+    print('\n')
+    
+def info (dataframe):
+    print("=" *20 , 'dataframe info' ,"=" * 20)
+    print(dataframe.info())
+    print('\n')
+    
+    
+shape(male)
+describe(male)
+info(male)
+==================== dataframe shape ====================
+(28, 5)
+
+
+==================== dataframe describe ====================
+       Unnamed: 0       Rank  New cases in 2020  % of all cancers
+count   28.000000  27.000000       2.800000e+01         27.000000
+mean    13.500000  14.000000       6.464791e+05          3.474074
+std      8.225975   7.937254       1.749049e+06          4.285180
+min      0.000000   1.000000       2.156000e+04          0.200000
+25%      6.750000   7.500000       7.340700e+04          0.800000
+50%     13.500000  14.000000       1.710950e+05          1.800000
+75%     20.250000  20.500000       4.239785e+05          3.900000
+max     27.000000  27.000000       9.342957e+06         15.400000
+
+
+==================== dataframe info ====================
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 28 entries, 0 to 27
+Data columns (total 5 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   Unnamed: 0         28 non-null     int64  
+ 1   Rank               27 non-null     float64
+ 2   Cancer             28 non-null     object 
+ 3   New cases in 2020  28 non-null     int64  
+ 4   % of all cancers   27 non-null     float64
+dtypes: float64(2), int64(2), object(1)
+memory usage: 1.2+ KB
+None
+
+
+shape(female)
+info(female)
+describe(female)
+==================== dataframe shape ====================
+(31, 5)
+
+
+==================== dataframe info ====================
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 31 entries, 0 to 30
+Data columns (total 5 columns):
+ #   Column             Non-Null Count  Dtype  
+---  ------             --------------  -----  
+ 0   Unnamed: 0         31 non-null     int64  
+ 1   Rank               30 non-null     float64
+ 2   Cancer             31 non-null     object 
+ 3   New cases in 2020  31 non-null     int64  
+ 4   % of all cancers   30 non-null     float64
+dtypes: float64(2), int64(2), object(1)
+memory usage: 1.3+ KB
+None
+
+
+==================== dataframe describe ====================
+       Unnamed: 0       Rank  New cases in 2020  % of all cancers
+count   31.000000  30.000000       3.100000e+01         30.000000
+mean    15.000000  15.500000       5.492260e+05          3.146667
+std      9.092121   8.803408       1.581724e+06          4.983887
+min      0.000000   1.000000       9.310000e+03          0.100000
+25%      7.500000   8.250000       3.554450e+04          0.400000
+50%     15.000000  15.500000       1.507910e+05          1.650000
+75%     22.500000  22.750000       3.417695e+05          3.475000
+max     30.000000  30.000000       8.751759e+06         25.800000
+
+
+#suppression des donnés unitules 
+f= female.drop(["Unnamed: 0" , "Rank"],1)
+f.head()
+/opt/conda/lib/python3.7/site-packages/ipykernel_launcher.py:2: FutureWarning: In a future version of pandas all arguments of DataFrame.drop except for the argument 'labels' will be keyword-only
+  
+Cancer	New cases in 2020	% of all cancers
+0	All cancers*	8751759	NaN
+1	Breast	2261419	25.8
+2	Colorectal **	865630	9.9
+3	Lung	770828	8.8
+4	Cervix uteri	604127	6.9
+male = male.drop(["Unnamed: 0" , "Rank"],1)
+male.head()
+/opt/conda/lib/python3.7/site-packages/ipykernel_launcher.py:1: FutureWarning: In a future version of pandas all arguments of DataFrame.drop except for the argument 'labels' will be keyword-only
+  """Entry point for launching an IPython kernel.
+Cancer	New cases in 2020	% of all cancers
+0	All cancers*	9342957	NaN
+1	Lung	1435943	15.4
+2	Prostate	1414259	15.1
+3	Colorectal**	1065960	11.4
+4	Stomach	719523	7.7
+male = male.rename(columns ={"New cases in 2020":"male New cases in 2020","% of all cancers":"male % of all cancers "})
+f = f.rename(columns={'New cases in 2020':'Female new cases 2020','% of all cancers':'Female % of all cancers'})
+female = female.replace('Colorectal **','Colorectal**')
+f.head()
+Cancer	Female new cases 2020	Female % of all cancers
+0	All cancers*	8751759	NaN
+1	Breast	2261419	25.8
+2	Colorectal **	865630	9.9
+3	Lung	770828	8.8
+4	Cervix uteri	604127	6.9
+male.head()
+Cancer	male New cases in 2020	male % of all cancers
+0	All cancers*	9342957	NaN
+1	Lung	1435943	15.4
+2	Prostate	1414259	15.1
+3	Colorectal**	1065960	11.4
+4	Stomach	719523	7.7
+x= male['male New cases in 2020']
+y= f["Female new cases 2020"]
+plt.figure()
+plt.plot(x)
+plt.plot(y)
+plt.xlabel('male new case 2020')
+plt.ylabel('female new case 2020')
+plt.title('all cancers')
+plt.show()
+
+x= male['male New cases in 2020']
+y= f["Female new cases 2020"]
+plt.figure()
+plt.hist(x)
+plt.hist(y)
+plt.xlabel('male new case 2020')
+plt.ylabel('female new case 2020')
+plt.title('all cancers')
+plt.show()
+
+plt.pie(x, labels=male ,  autopct = "%0.2f%%")
+plt.title('male cancer')
+plt.show()
+
+plt.pie(y, labels=f , autopct = "%0.2f%%")
+plt.title('female cancer')
+plt.show()
+
+ 
